@@ -42,10 +42,11 @@
   community.general.ufw:
     state: enabled
     policy: allow
-    notify:
-    - reload ufw
 
 - name: install apache2
   apt:
      name: apache2
      state: present
+
+  notify:
+    - reload ufw
