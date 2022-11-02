@@ -1,7 +1,7 @@
----
-- name: Upgrade System
-  apt: upgrade=dist update_cache=yes
-
-- name: Set a hostname
-  ansible.builtin.hostname:
-    name: exam.shoplikeaboss247.com
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: deploy

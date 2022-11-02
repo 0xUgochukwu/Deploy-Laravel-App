@@ -1,0 +1,47 @@
+---
+- name: Upgrade System
+  apt: upgrade=dist update_cache=yes
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: exam.shoplikeaboss247.com
+
+- name: Set timezone to Africa/Lagos
+  timezone:
+    name: Africa/Lagos
+
+# - name: Set hostname in hosts file
+#   command: mv /home/vagrant/exam/files/hosts /etc/hosts
+
+
+- name: Copy hosts file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/hosts
+    dest: /etc/hosts
+    remote_src: no
+
+- name: Install ufw
+  apt: name=ufw state=latest
+
+- name: Allow SSH with ufw
+  ufw:
+    rule: allow
+    name: SSH
+
+- name: Allow OpenSSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow WWW Full 
+  ufw: 
+    rule: allow
+    name: 'WWW Full'
+
+- name: Allow everything and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: allow
+    notify:
+    - reload ufw
+
