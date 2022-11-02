@@ -47,6 +47,22 @@
   apt:
      name: apache2
      state: present
+     
+- name: Get mysql
+  command: wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 
+- name: install mysql
+  apt:
+    name: ./mysql-apt-config_0.8.22-1_all.deb
+    
+ - name: Update System
+  apt: upgrade=dist update_cache=yes
+  
+- name: install mysql-server
+  apt:
+    name: mysql-server
+    
+  
   notify:
     - reload ufw
+    
