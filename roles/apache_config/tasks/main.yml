@@ -1,3 +1,11 @@
+- name: install apache2 server
+  apt:
+     name: apache2
+     state: presen
+
+  notify:
+    - start apache2
+
 - name: checkout latest code from github
   git: >
     repo=https://github.com/f1amy/laravel-realworld-example-app.git
@@ -27,12 +35,14 @@
 - name: Setting up Configuration File
   shell: sudo touch /etc/apache2/sites-available/shoplikeaboss247.conf
 
-
 - name: Copy Configuration file
   ansible.builtin.copy:
     src: /home/vagrant/exam/files/shoplikeaboss247.conf
     dest: /etc/apache2/sites-available/shoplikeaboss247.conf
     remote_src: no
+
+- name: Enabling new Configuration
+  shell: sudo a2ensite shoplikeaboss247.conf
 
 - name: Setting up .env File
   shell: sudo touch /var/www/shoplikeaboss247/.env
@@ -43,3 +53,35 @@
     src: /home/vagrant/exam/files/.env
     dest: /var/www/shoplikeaboss247/.env
     remote_src: no
+
+- name: Enable Apache 2 Mod Rewrite
+  shell: sudo a2enmod rewrite
+
+  notify:
+    - restart apache2
+
+
+- name: Creating File
+  shell: sudo touch /var/www/shoplikeaboss247/.htaccess
+
+- name: Copy htaccess file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/.htaccess
+    dest: /var/www/shoplikeaboss247/.htaccess
+    remote_src: no
+
+
+- name: Copy .env file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/web.php
+    dest: /var/www/shoplikeaboss247/routes/web.php
+    remote_src: no
+
+
+- name: Download and installs all libs and dependencies for composer
+  community.general.composer:
+    command: install
+    working_dir: /var/www/shoplikeaboss247/
+
+- name: Migrating Database
+  shell: php artisan migrate --seed

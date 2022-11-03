@@ -1,0 +1,26 @@
+- name: Upgrade System
+  apt: upgrade=dist update_cache=yes
+
+- name: Installing snapd
+  apt:
+    name: snapd
+
+- name: Installing Core
+  community.general.snap:
+    name: core
+
+- name: Refreshing Core
+  command: snap refresh core
+
+- name: Installing certbot
+  community.general.snap:
+    name: certbot
+    classic: true
+
+- name: Configuring certbot
+  shell: sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+- name: Requesting SSL Certificate
+  shell: sudo certbot --apache --agree-tos --redirect -m 0xUgochukwu@gmail.com -d shoplikeaboss247.com -d www.shoplikeaboss247.com
+
+

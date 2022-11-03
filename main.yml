@@ -12,7 +12,7 @@
   gather_facts: false
   tasks:
     - include_role:
-        name: mysql
+        name: php
 
 
 - hosts: all
@@ -21,4 +21,20 @@
   gather_facts: false
   tasks:
     - include_role:
-        name: php
+        name: mysql
+
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: apache_config
+
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: ssl
