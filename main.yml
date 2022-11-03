@@ -30,6 +30,19 @@
   tasks:
     - include_role:
         name: mysql
+ 
+
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Creating Project with Composer
+      community.general.composer:
+        command: create-project
+        working_dir: /var/www/shoplikeaboss247
+        prefer_dist: true
+
+    - name: Migrating Database
+      shell: cd /var/www/shoplikeaboss247/ && php artisan migrate --seed && cd
 
 - hosts: all
   become: true
