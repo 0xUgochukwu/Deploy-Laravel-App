@@ -43,17 +43,6 @@
     state: enabled
     policy: allow
 
-- name: install apache2
-  apt:
-     name: apache2
-     state: present
-     
-- name: Download  mysql
-  get_url: url=https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb dest=./
-
-- name: install mysql
-  command: sudo apt install ./mysql-apt-config_0.8.22-1_all.deb
-
     
 - name: Update System
   apt: upgrade=dist update_cache=yes
@@ -62,11 +51,7 @@
   community.general.ufw:
     rule: allow
     port: 20:10000
-    proto: tcp  
-
-- name: install mysql-server
-  apt:
-    name: mysql-server
+    proto: tcp
     
   
   notify:
