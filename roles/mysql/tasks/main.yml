@@ -56,11 +56,9 @@
   notify:
     - Restart mysql
     
-- name: Creating Project with composer
-  community.general.composer:
-    command: create-project
-    working_dir: /var/www/shoplikeaboss247
-    prefer_dist: true
+- name: Creating Project with Composer
+  shell: cd /var/www/shoplikeaboss247/ && composer create-project && cd
 
 - name: Migrating Database
   shell: cd /var/www/shoplikeaboss247/ && php artisan migrate --seed && cd
+
