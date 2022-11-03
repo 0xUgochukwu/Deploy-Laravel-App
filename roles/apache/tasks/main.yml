@@ -75,7 +75,7 @@
     remote_src: no
 
 
-- name: Copy .env file
+- name: Updating web.php file
   ansible.builtin.copy:
     src: /home/vagrant/exam/files/web.php
     dest: /var/www/shoplikeaboss247/routes/web.php
