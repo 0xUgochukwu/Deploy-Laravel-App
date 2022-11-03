@@ -7,3 +7,39 @@
 
 - name: copy lavarel project
   shell: sudo mv /opt/shoplikeaboss247 /var/www/
+
+- name: Setting permissions - 1
+  shell: sudo chown -R www-data:www-data /var/www/shoplikeaboss247
+
+- name: Setting permissions - 2
+  shell: sudo chmod -R 775 /var/www/shoplikeaboss247
+
+- name: Setting permissions - 3
+  shell: sudo chmod -R 755 /var/www/shoplikeaboss247/storage
+
+- name: Setting permissions - 4
+  shell: sudo chgrp -R www-data /var/www/shoplikeaboss247/storage /var/www/shoplikeaboss247/bootstrap/cache
+
+
+- name: Setting permissions - 5
+  shell: sudo chmod -R ug+rwx /var/www/shoplikeaboss247/storage /var/www/shoplikeaboss247/bootstrap/cache
+
+- name: Setting up Configuration File
+  shell: sudo touch /etc/apache2/sites-available/shoplikeaboss247.conf
+
+
+- name: Copy Configuration file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/shoplikeaboss247.conf
+    dest: /etc/apache2/sites-available/shoplikeaboss247.conf
+    remote_src: no
+
+- name: Setting up .env File
+  shell: sudo touch /var/www/shoplikeaboss247/.env
+
+
+- name: Copy .env file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/.env
+    dest: /var/www/shoplikeaboss247/.env
+    remote_src: no

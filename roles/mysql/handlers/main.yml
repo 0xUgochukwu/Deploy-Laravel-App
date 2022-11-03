@@ -1,7 +1,4 @@
-# file: mysql/handlers/main.yml
-
-- name: restart mysql
+- name: Restart mysql
   service:
     name: mysql
     state: restarted
-    enabled: yes

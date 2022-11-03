@@ -1,9 +1,57 @@
-# file: mysql/tasks/main.yml
+- name: Download mysql
+  get_url: 
+    url="https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb"
+    dest="/root/mysql-apt-config_0.8.22-1_all.deb"
 
-- include: install.yml
-- include: configure.yml
-- include: secure.yml
-- include: databases.yml
-- include: users.yml
-- include: monit.yml
-  when: monit_protection is defined and monit_protection == true
+- name: Install mysql
+  apt: deb="/root/mysql-apt-config_0.8.22-1_all.deb"
+
+
+- name: Upgrade System
+  apt: upgrade=dist update_cache=yes
+
+- name: Install mysql-server
+  apt:
+    name: mysql-server
+    state: present
+
+- name: install pip3
+  apt: name=python3-pip state=present 
+
+- name: Install pymysql python package
+  ansible.builtin.pip:
+    name: pymysql
+
+- name: start and enable mysql service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  notify:
+    - Restart mysql
+
+- name: creating mysql user (shoplikeaboss247)
+  mysql_user:
+    name: "{{db_user}}"
+    password: "{{db_pass}}"
+    priv: '*.*:ALL'
+    host: 'localhost'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+- name: creating laravel
+  mysql_db:
+    name: "{{db_name}}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+   
+- name: Enable remote login to mysql
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    backup: yes
+
+ 
+  notify:
+    - Restart mysql
