@@ -31,7 +31,7 @@
     - include_role:
         name: mysql
         
- - hosts: all
+- hosts: all
   become: true
   become_user: root
   gather_facts: false
