@@ -8,10 +8,13 @@
     - apt-transport-https
     - ca-certificates
 
+- name: Create destination for PHP
+  shell: sudo touch /etc/apt/trusted.gpg.d/php.gpg
+
 - name: Get php URL
   get_url:
     url: https://packages.sury.org/php/apt.gpg
-    dest: /root/etc/apt/trusted.gpg.d/php.gpg
+    dest: /etc/apt/trusted.gpg.d/php.gpg
 
 - name: Still installing PHP
   shell: echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list

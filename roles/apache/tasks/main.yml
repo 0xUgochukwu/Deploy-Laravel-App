@@ -1,20 +1,24 @@
 - name: install apache2 server
   apt:
      name: apache2
-     state: presen
+     state: present
 
   notify:
     - start apache2
 
-- name: checkout latest code from github
-  git: >
-    repo=https://github.com/f1amy/laravel-realworld-example-app.git
-    dest=/opt/shoplikeaboss247
-    force=yes
-    accept_hostkey=yes
+- name: Install git
+  apt:
+    name: git
+    state: present
+    update_cache: yes
 
-- name: copy lavarel project
-  shell: sudo mv /opt/shoplikeaboss247 /var/www/
+- name: Clone project Repo
+  git:
+    repo: https://github.com/f1amy/laravel-realworld-example-app.git
+    dest: /var/www/shoplikeaboss247
+    clone: yes
+    update: yes
+    force: yes
 
 - name: Setting permissions - 1
   shell: sudo chown -R www-data:www-data /var/www/shoplikeaboss247
