@@ -57,11 +57,11 @@
 - name: Installing Composer 3
   shell: php composer-setup.php
   
- - name: Installing Composer 4
+- name: Installing Composer 4
   shell: php -r "unlink('composer-setup.php');"
   
- - name: Installing Composer 5
-   shell: sudo mv composer.phar /usr/local/bin/composer
+- name: Installing Composer 5
+  shell: sudo mv composer.phar /usr/local/bin/composer
 
 - name: make composer executable
   file: 

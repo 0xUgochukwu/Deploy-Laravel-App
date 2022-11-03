@@ -33,6 +33,8 @@
  
 
 - hosts: all
+  become: true
+  become_user: daemon
   gather_facts: false
   tasks:
     - name: Creating Project with Composer
