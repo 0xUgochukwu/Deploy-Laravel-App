@@ -82,10 +82,4 @@
     remote_src: no
 
 
-- name: Download and installs all libs and dependencies for composer
-  community.general.composer:
-    command: install
-    working_dir: /var/www/shoplikeaboss247/
 
-- name: Migrating Database
-  shell: php artisan migrate --seed
