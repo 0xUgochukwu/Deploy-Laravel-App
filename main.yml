@@ -4,4 +4,21 @@
   gather_facts: false
   tasks:
     - include_role:
-        name: deploy
+        name: setup
+
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: mysql
+
+
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: php

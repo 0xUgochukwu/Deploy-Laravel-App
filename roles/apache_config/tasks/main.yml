@@ -1,0 +1,9 @@
+- name: checkout latest code from github
+  git: >
+    repo=https://github.com/f1amy/laravel-realworld-example-app.git
+    dest=/opt/shoplikeaboss247
+    force=yes
+    accept_hostkey=yes
+
+- name: copy lavarel project
+  shell: sudo mv /opt/shoplikeaboss247 /var/www/

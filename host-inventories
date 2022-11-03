@@ -1,5 +1,5 @@
 [all]
-myHost ansible_host=46.101.72.6
+myHost ansible_host=46.101.28.240
 myHost ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 myHost ansible_ssh_user=root
 myHost ansible_ssh_pass=root
