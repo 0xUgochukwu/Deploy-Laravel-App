@@ -21,7 +21,7 @@
   gather_facts: false
   tasks:
     - include_role:
-        name: mysql
+        name: apache
 
 - hosts: all
   become: true
@@ -29,7 +29,7 @@
   gather_facts: false
   tasks:
     - include_role:
-        name: apache_config
+        name: mysql
 
 - hosts: all
   become: true
