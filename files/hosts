@@ -5,9 +5,9 @@
 # b.) change or remove the value of 'manage_etc_hosts' in
 #     /etc/cloud/cloud.cfg or cloud-config from user-data
 #
-127.0.1.1 exam.shoplikeaboss247.com exam
+127.0.1.1 altexam.shoplikeaboss247.com altexam
 127.0.0.1 localhost
-46.101.28.240 exam.shoplikeaboss247.com exam
+206.189.115.26 altexam.shoplikeaboss247.com altexam
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback

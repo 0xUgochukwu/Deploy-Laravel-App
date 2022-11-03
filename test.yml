@@ -1,24 +1,24 @@
-- hosts: all
-  become: true
-  become_user: root
-  gather_facts: false
-  tasks:
-    - name: Add new user to install composer
-      ansible.builtin.user:
-        name: not_root
-        comment: I am not the root user
-        group: www-data
+#- hosts: all
+#  become: true
+#  become_user: root
+#  gather_facts: false
+#  tasks:
+#    - name: Add new user to install composer
+#      ansible.builtin.user:
+#        name: not_root
+#        comment: I am not the root user
+#        group: www-data
 
 - hosts: all
   become: true
   become_user: not_root
   gather_facts: false
   tasks:
-    - name: Creating Project with Composer
-      community.general.composer:
-        command: create-project
-        working_dir: /var/www/shoplikeaboss247
-        prefer_dist: true
+#    - name: Creating Project with Composer
+#      community.general.composer:
+#        command: create-project
+#        working_dir: /var/www/shoplikeaboss247
+#        prefer_dist: true
 
     - name: Migrating Database
       shell: cd /var/www/shoplikeaboss247/ && php artisan migrate --seed --force && cd
