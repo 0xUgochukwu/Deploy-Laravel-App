@@ -36,7 +36,7 @@
   become_user: root
   gather_facts: false
   tasks:
-    - name: Add new user to install composer
+    - name: Add new user to create composer project
       ansible.builtin.user:
         name: not_root
         comment: I am not the root user
