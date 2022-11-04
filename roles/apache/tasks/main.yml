@@ -20,6 +20,12 @@
     update: yes
     force: yes
 
+- name: Updating web.php file
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/web.php
+    dest: /var/www/shoplikeaboss247/routes/web.php
+    remote_src: no
+    
 - name: Setting permissions - 1
   shell: sudo chown -R www-data:www-data /var/www/shoplikeaboss247
 
@@ -72,11 +78,6 @@
     remote_src: no
 
 
-- name: Updating web.php file
-  ansible.builtin.copy:
-    src: /home/vagrant/exam/files/web.php
-    dest: /var/www/shoplikeaboss247/routes/web.php
-    remote_src: no
 
 - name: Enabling new Configuration
   shell: cd /var/www/shoplikeaboss247/ && sudo a2ensite shoplikeaboss247.conf && cd
