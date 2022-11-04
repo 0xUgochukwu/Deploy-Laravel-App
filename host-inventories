@@ -1,6 +1,6 @@
 [all]
-myExam ansible_host=206.189.115.26
-myExam ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
-myExam ansible_ssh_user=root
-myExam ansible_ssh_pass=root
+exam ansible_host=138.68.188.216
+exam ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
+exam ansible_ssh_user=root
+exam ansible_ssh_pass=root
 
