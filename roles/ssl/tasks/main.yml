@@ -21,7 +21,7 @@
   shell: sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 - name: Requesting SSL Certificate
-  shell: sudo certbot --apache --agree-tos --redirect -m 0xUgochukwu@gmail.com -d shoplikeaboss247.com -d www.shoplikeaboss247.com -d exam.shoplikeaboss247.com
+  shell: sudo certbot --apache --agree-tos --redirect -m 0xUgochukwu@gmail.com -d test.shoplikeaboss247.com
 
 - name: Copy htaccess new file to ensure mod rewrite
   ansible.builtin.copy:
