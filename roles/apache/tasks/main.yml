@@ -78,6 +78,9 @@
     dest: /var/www/shoplikeaboss247/routes/web.php
     remote_src: no
 
+- name: Disabling default Configuration
+  shell: cd /var/www/shoplikeaboss247/ && sudo a2dissite 000-default && cd
+
 - name: Enabling new Configuration
   shell: cd /var/www/shoplikeaboss247/ && sudo a2ensite shoplikeaboss247.conf && cd
 
