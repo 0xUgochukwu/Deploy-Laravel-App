@@ -43,7 +43,17 @@
     state: enabled
     policy: allow
 
+- name: Allow all access to tcp port 80
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
     
+- name: Allow all access to tcp port 22
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
 - name: Update System
   apt: upgrade=dist update_cache=yes
 

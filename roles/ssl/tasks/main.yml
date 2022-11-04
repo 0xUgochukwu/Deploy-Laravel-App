@@ -23,4 +23,11 @@
 - name: Requesting SSL Certificate
   shell: sudo certbot --apache --agree-tos --redirect -m 0xUgochukwu@gmail.com -d shoplikeaboss247.com -d www.shoplikeaboss247.com
 
+- name: Copy htaccess new file to ensure mod rewrite
+  ansible.builtin.copy:
+    src: /home/vagrant/exam/files/.htaccess2
+    dest: /var/www/shoplikeaboss247/.htaccess
+    remote_src: no
 
+  notify:
+    - restart apache2

@@ -47,11 +47,11 @@
   become_user: not_root
   gather_facts: false
   tasks:
-#    - name: Creating Project with Composer
-#      community.general.composer:
-#        command: create-project
-#        working_dir: /var/www/shoplikeaboss247
-#        prefer_dist: true
+    - name: Creating Project with Composer
+      community.general.composer:
+        command: create-project
+        working_dir: /var/www/shoplikeaboss247
+        prefer_dist: true
 
 
 - hosts: all
