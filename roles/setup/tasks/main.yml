@@ -4,7 +4,7 @@
 
 - name: Set hostname
   ansible.builtin.hostname:
-    name: exam.shoplikeaboss247.com
+    name: test.shoplikeaboss247.com
 
 - name: Set timezone to Africa/Lagos
   timezone:
