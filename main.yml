@@ -1,3 +1,7 @@
+---
+
+# Setup important and basic stuff needed  on the server
+
 - hosts: all
   become: true
   become_user: root
@@ -5,6 +9,9 @@
   tasks:
     - include_role:
         name: setup
+
+
+# Setup PHP
 
 - hosts: all
   become: true
@@ -15,6 +22,8 @@
         name: php
 
 
+# Setup Apache
+
 - hosts: all
   become: true
   become_user: root
@@ -23,6 +32,9 @@
     - include_role:
         name: apache
 
+
+# Set up mysql database
+
 - hosts: all
   become: true
   become_user: root
@@ -30,7 +42,11 @@
   tasks:
     - include_role:
         name: mysql
-        
+
+
+# Add new user so you can run compser as a user that is not the root user
+## For safety composer is not usually run as the root user, See https://getcomposer.org/root for details.        
+
 - hosts: all
   become: true
   become_user: root
@@ -41,6 +57,9 @@
         name: not_root
         comment: I am not the root user
         group: www-data
+
+
+# Change to the newly created user and create-project with composer in our project directory
 
 - hosts: all
   become: true
@@ -54,6 +73,9 @@
         prefer_dist: true
 
 
+
+# Migrate database and SetUp SSL
+
 - hosts: all
   become: true
   become_user: root
@@ -65,3 +87,23 @@
     
     - include_role:
         name: ssl
+
+
+# Install and set up PostgreSQL using bash script (pgsql.sh)
+
+- hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - name: Copying the Script to the remote server
+      ansible.builtin.copy:
+        src: /home/vagrant/exam/pgsql.sh
+        dest: /root/pgsql.sh
+        remote_src: no
+
+    - name: Making the file executable
+      shell: sudo chmod +x pgsql.sh
+
+    - name: Installing and Setting up PostgreSQL with a bash script
+      ansible.builtin.script: pgsql.sh
